@@ -18,26 +18,6 @@ List<Point<int>> formPairs(Map<String, dynamic> data) {
   return pairs;
 }
 
-void main() {
-  String jsonData = File('testcase2.json').readAsStringSync();
-  Map<String, dynamic> data = jsonDecode(jsonData);
-  List<Point<int>> points = formPairs(data);
-
-  int n = data["keys"]["n"];
-  int k = data["keys"]["k"];
-  print("n: $n, k: $k");
-
-  print(points);
-
-  if (n < k) {
-    print("Error: Not enough points provided.");
-    return;
-  }
-
-  double constant = lagrangeInterpolation(points, k);
-  print("Key: ${constant.toDouble()}");
-}
-
 double lagrangeInterpolation(List<Point<int>> points, int k) {
   int n = k + 1;
   double sum = 0.0;
@@ -56,4 +36,24 @@ double lagrangeInterpolation(List<Point<int>> points, int k) {
   }
 
   return sum;
+}
+
+void main() {
+  String jsonData = File('testcase2.json').readAsStringSync();
+  Map<String, dynamic> data = jsonDecode(jsonData);
+  List<Point<int>> points = formPairs(data);
+
+  int n = data["keys"]["n"];
+  int k = data["keys"]["k"];
+  print("n: $n, k: $k");
+
+  print(points);
+
+  if (n < k) {
+    print("Error: Not enough points provided.");
+    return;
+  }
+
+  double constant = lagrangeInterpolation(points, k);
+  print("Key: ${constant.toDouble()}");
 }
