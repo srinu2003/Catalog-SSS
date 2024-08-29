@@ -18,8 +18,8 @@ List<Point<int>> formPairs(Map<String, dynamic> data) {
   return pairs;
 }
 
-Future<void> main() async {
-  String jsonData = await File('testcase1.json').readAsString();
+void main() {
+  String jsonData = File('testcase2.json').readAsStringSync();
   Map<String, dynamic> data = jsonDecode(jsonData);
   List<Point<int>> points = formPairs(data);
 
@@ -28,53 +28,32 @@ Future<void> main() async {
   print("n: $n, k: $k");
 
   print(points);
-  print(points.runtimeType);
 
   if (n < k) {
     print("Error: Not enough points provided.");
     return;
   }
 
-  // Get the coefficients of the polynomial
-  List<double> coefficients = lagrangeInterpolation(points, k);
-
-  // Print the polynomial coefficients of x power 0
-  print("Key: ${coefficients[0]}");
+  double constant = lagrangeInterpolation(points, k);
+  print("Key: ${constant.toDouble()}");
 }
 
-// Function to calculate Lagrange polynomial coefficients
-List<double> lagrangeInterpolation(List<Point<int>> points, int k) {
+double lagrangeInterpolation(List<Point<int>> points, int k) {
   int n = k + 1;
-  List<double> coefficients = List.filled(n, 0.0);
+  double sum = 0.0;
 
   for (int i = 0; i < n; i++) {
     double y_i = points[i].y.toDouble();
-    List<double> basisPolynomial = List.filled(n, 0.0);
-    basisPolynomial[0] = 1.0;
-
-    for (int j = 0; j < n; j++) {
-      if (i != j) {
+    double term = y_i;
+    for (var j = 0; j < n; j++) {
+      if (j != i) {
         double x_j = points[j].x.toDouble();
         double x_i = points[i].x.toDouble();
-
-        for (int k = n - 1; k >= 0; k--) {
-          basisPolynomial[k] *= -x_j;
-          if (k > 0) {
-            basisPolynomial[k] += basisPolynomial[k - 1];
-          }
-        }
-
-        double denom = x_i - x_j;
-        for (int k = 0; k < n; k++) {
-          basisPolynomial[k] /= denom;
-        }
+        term *= (0 - x_j) / (x_i - x_j);
       }
     }
-
-    for (int j = 0; j < n; j++) {
-      coefficients[j] += y_i * basisPolynomial[j];
-    }
+    sum += term;
   }
 
-  return coefficients;
+  return sum;
 }
