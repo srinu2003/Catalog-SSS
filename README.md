@@ -9,7 +9,7 @@ The input is a json file in the following format:
 ```json
 {
     "keys": {
-        "n": <number of points>,
+        "n": <number of points> ,
         "k": <degree of the polynomial>
     },
     "<x1>": {
