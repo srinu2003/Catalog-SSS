@@ -96,16 +96,16 @@ The points can be represented as $(x_0, y_0), (x_1, y_1), ..., (x_{n-1}, y_{n-1}
 
 The polynomial can be interpolated using the Lagrange Interpolation Formula:
 
-$$
+```math
 f(x) = \sum_{i=0}^{k} y_i \cdot \prod_{j=0, j \neq i}^{k} \frac{x - x_j}{x_i - x_j}
-$$, 
+```
 where $y_i$ is the value of the point at $x_i$.
 
 The Secret Key can be calculated by interpolating the points and finding the value of the polynomial at $x = 0$.
 
-$$
+```math
 a_0 = f(0) = \sum_{i=0}^{k} y_i \cdot \prod_{j=0, j \neq i}^{k} \frac{0 - x_j}{x_i - x_j}
-$$
+```
 
 The program then prints the value of the constant term $a_0$ of the polynomial, which is the Secret Key.
 
