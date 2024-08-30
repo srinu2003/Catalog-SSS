@@ -20,26 +20,25 @@ List<Point<int>> formPairs(Map<String, dynamic> data) {
 
 double lagrangeInterpolation(List<Point<int>> points, int k) {
   int n = k + 1;
-  double sum = 0.0;
+  double result = 0.0;
 
   for (int i = 0; i < n; i++) {
-    double y_i = points[i].y.toDouble();
-    double term = y_i;
+    double term = points[i].y.toDouble();
+    double x_i = points[i].x.toDouble();
     for (var j = 0; j < n; j++) {
       if (j != i) {
         double x_j = points[j].x.toDouble();
-        double x_i = points[i].x.toDouble();
-        term *= (0 - x_j) / (x_i - x_j);
+        term *= (0.0 - x_j) / (x_i - x_j);
       }
     }
-    sum += term;
+    result += term;
   }
 
-  return sum;
+  return result;
 }
 
 void main() {
-  String jsonData = File('testcase2.json').readAsStringSync();
+  String jsonData = File('testcase1.json').readAsStringSync();
   Map<String, dynamic> data = jsonDecode(jsonData);
   List<Point<int>> points = formPairs(data);
 

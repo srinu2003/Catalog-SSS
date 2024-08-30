@@ -2,7 +2,7 @@ from dataclasses import dataclass
 import json
 from typing import List
 
-testcase = 'testcase2.json'
+testcase = 'testcase1.json'
 
 @dataclass
 class Point:
@@ -21,11 +21,14 @@ def legranges_interpolation_polynomial(points: List[Point], k: int, x: int) -> f
     result = 0.0
 
     for i in range(n):
-        term = points[i].y
+        x_i, y_i = points[i].x, points[i].y
+        # print(f'At x_i = {points[i].x}, y_i = {points[i].y}')
+        lagrange_basis = 1.0
         for j in range(n):
             if i != j:
-                term *= (x - points[j].x) / (points[i].x - points[j].x)
-        result += term
+                lagrange_basis *= (0.0 - points[j].x) / (x_i - points[j].x)
+        # print(f'  L_i({x_i}) = {lagrange_basis}, P_i({x_i}) = {y_i * lagrange_basis}')
+        result += y_i * lagrange_basis
 
     return result
 
