@@ -1,4 +1,4 @@
-# Catalog Coading Round
+# Catalog Coding Round
  
 ## Problem Statement
 You are given a json file containing keys and points. Your task is to write a program that reads the json file, extracts the keys and points, and perform Shamir's Secret-Sharing Scheme interpolating the points to find the value of the constant term of the polynomial(which is the secret key).
