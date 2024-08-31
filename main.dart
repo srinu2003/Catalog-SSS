@@ -44,9 +44,9 @@ void main() {
 
   int n = data["keys"]["n"];
   int k = data["keys"]["k"];
-  print("n: $n, k: $k");
+  // print("n: $n, k: $k");
 
-  print(points);
+  // print(points);
 
   if (n < k) {
     print("Error: Not enough points provided.");
